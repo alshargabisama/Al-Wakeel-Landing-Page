@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+}
+
+body {
+  background-color: #0d0d0f;
+  color: #ffffff;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* وميض توهج أيقونة التطبيق داخل الهاتف */
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 15px rgba(229, 184, 66, 0.4), inset 0 0 10px rgba(255, 242, 168, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(229, 184, 66, 0.85), inset 0 0 15px rgba(255, 242, 168, 0.6);
+    transform: scale(1.04);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(229, 184, 66, 0.4), inset 0 0 10px rgba(255, 242, 168, 0.3);
+    transform: scale(1);
+  }
+}
+
+.gold-app-glow {
+  animation: goldPulse 2.8s infinite ease-in-out;
+}
