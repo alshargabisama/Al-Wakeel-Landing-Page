@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Tone from 'tone';
 import { Volume2, VolumeX, MapPin, MessageCircle } from 'lucide-react';
 import appLogo from './assets/al-wakeel-logo.jpg';
