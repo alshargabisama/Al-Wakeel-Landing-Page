@@ -532,7 +532,7 @@ export default function App() {
             <span>واتساب</span>
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/alwakeelgoldbank"
             target="_blank"
             rel="noreferrer"
             style={{ color: '#A1A1AA', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
@@ -546,7 +546,7 @@ export default function App() {
             </svg>
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/share/1AMTa2bFfV/"
             target="_blank"
             rel="noreferrer"
             style={{ color: '#A1A1AA', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
