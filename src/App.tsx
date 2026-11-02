@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Tone from 'tone';
 import { Volume2, VolumeX, MapPin, MessageCircle } from 'lucide-react';
-import appLogo from './assets/al-wakeel-logo.jpg';
 
 interface GoldPiece {
   x: number;
@@ -25,7 +24,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const synthRef = useRef<Tone.PolySynth | null>(null);
 
-  // إعداد الصوت السينمائي الفاخر
+  // إعداد الصوت السينمائي الهادئ
   useEffect(() => {
     synthRef.current = new Tone.PolySynth(Tone.Synth, {
       oscillator: { type: 'sine' },
@@ -109,7 +108,6 @@ export default function App() {
         const dy = targetY - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // قوة السحب المغناطيسي للهاتف
         if (dist < 460) {
           const attraction = (460 - dist) / 460;
           p.vx += (dx / dist) * attraction * 0.65;
@@ -122,7 +120,6 @@ export default function App() {
         p.y += p.vy;
         p.rotation += p.vRot;
 
-        // عند وصول الذهب إلى الهاتف
         if (dist < 32) {
           playChime();
           pieces.splice(i, 1);
@@ -220,6 +217,7 @@ export default function App() {
 
   return (
     <div
+      dir="rtl"
       style={{
         minHeight: '100vh',
         backgroundColor: '#09090B',
@@ -231,8 +229,10 @@ export default function App() {
         alignItems: 'center',
         padding: '20px 24px',
         overflow: 'hidden',
+        direction: 'rtl',
       }}
     >
+      {/* خلفية الكانفاس التفاعلية */}
       <canvas
         ref={canvasRef}
         style={{
@@ -246,17 +246,57 @@ export default function App() {
         }}
       />
 
-      {/* 1. الترويسة العلوية مع الشعار الجانبي والاسم الكامل */}
+      {/* 1. الترويسة العلوية مضبوطة بالكامل على اتجاه RTL العربي */}
       <header
         style={{
           width: '100%',
           maxWidth: 960,
           display: 'flex',
+          flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
           zIndex: 10,
         }}
       >
+        {/* هوية المحل على اليمين: الشعار أولاً ثم النصوص بجانبه */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: 13,
+              border: '1.8px solid #D4AF37',
+              boxShadow: '0 0 12px rgba(212, 175, 55, 0.25)',
+              overflow: 'hidden',
+              backgroundColor: '#09090B',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <img
+              src="/al-wakeel-logo.jpg"
+              alt="شعار مجوهرات الوكيل بنك الذهب"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+
+          <div style={{ textAlign: 'right' }}>
+            <h1 style={{ fontSize: 18, fontWeight: 800, color: '#EDEDED', margin: 0, letterSpacing: '-0.2px' }}>
+              مجوهرات الوكيل بنك الذهب
+            </h1>
+            <p style={{ fontSize: 12, color: '#E5B842', fontWeight: 600, margin: '2px 0 0 0' }}>
+              تعز • شارع 26 سبتمبر
+            </p>
+          </div>
+        </div>
+
+        {/* زر كتم/تشغيل الصوت على أقصى اليسار */}
         <button
           onClick={toggleSound}
           title={soundEnabled ? 'كتم الصوت' : 'تفعيل صوت الرنين'}
@@ -276,43 +316,9 @@ export default function App() {
         >
           {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
         </button>
-
-        {/* هوية المحل باسمه الكامل واللوجو ذو الإطار الذهبي */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ textAlign: 'right' }}>
-            <h1 style={{ fontSize: 18, fontWeight: 800, color: '#EDEDED', letterSpacing: '-0.2px' }}>
-              مجوهرات الوكيل بنك الذهب
-            </h1>
-            <p style={{ fontSize: 12, color: '#E5B842', fontWeight: 600 }}>تعز • شارع 26 سبتمبر</p>
-          </div>
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 12,
-              border: '1.5px solid #D4AF37',
-              boxShadow: '0 0 10px rgba(212, 175, 55, 0.25)',
-              overflow: 'hidden',
-              backgroundColor: '#09090B',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src={appLogo}
-              alt="شعار مجوهرات الوكيل بنك الذهب"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-              }}
-            />
-          </div>
-        </div>
       </header>
 
-      {/* 2. المحتوى الأوسط: الهاتف النظيف وبداخله التطبيق */}
+      {/* 2. المحتوى الأوسط: الهاتف بداخله التطبيق */}
       <main
         style={{
           display: 'flex',
@@ -336,6 +342,7 @@ export default function App() {
           احصل على <span style={{ color: '#E5B842' }}>بنك الذهب</span> في هاتفك
         </h2>
 
+        {/* مجسم الهاتف */}
         <div
           style={{
             width: 250,
@@ -373,16 +380,17 @@ export default function App() {
               height: 92,
               borderRadius: 22,
               overflow: 'hidden',
-              border: '1.5px solid rgba(229, 184, 66, 0.5)',
+              border: '1.8px solid #D4AF37',
+              boxShadow: '0 0 16px rgba(212, 175, 55, 0.35)',
               cursor: 'pointer',
-              backgroundColor: '#161618',
+              backgroundColor: '#09090B',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
             <img
-              src={appLogo}
+              src="/al-wakeel-logo.jpg"
               alt="تطبيق مجوهرات الوكيل بنك الذهب"
               style={{
                 width: '100%',
@@ -392,10 +400,10 @@ export default function App() {
             />
           </div>
 
-          <p style={{ marginTop: 14, fontSize: 14, fontWeight: 800, color: '#EDEDED' }}>
+          <p style={{ marginTop: 14, fontSize: 14, fontWeight: 800, color: '#EDEDED', textAlign: 'center' }}>
             مجوهرات الوكيل بنك الذهب
           </p>
-          <span style={{ fontSize: 11, color: '#A1A1AA', fontWeight: 500, marginTop: 2 }}>
+          <span style={{ fontSize: 11, color: '#A1A1AA', fontWeight: 500, marginTop: 2, textAlign: 'center' }}>
             أسعار الذهب والعيارات اللحظية بتعز
           </span>
 
@@ -487,7 +495,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* 4. الشريط السفلي */}
+      {/* 4. الشريط السفلي مع الحفاظ على RTL */}
       <footer
         style={{
           width: '100%',
