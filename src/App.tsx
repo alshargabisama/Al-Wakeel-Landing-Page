@@ -137,7 +137,6 @@ export default function App() {
         ctx.globalAlpha = p.opacity;
 
         if (p.type === 'coin') {
-          // رسم جنيه ذهب مصقول
           const grad = ctx.createRadialGradient(-p.size * 0.2, -p.size * 0.2, p.size * 0.1, 0, 0, p.size);
           grad.addColorStop(0, '#FFF5BA');
           grad.addColorStop(0.35, '#E5B842');
@@ -167,7 +166,6 @@ export default function App() {
           ctx.font = '7px IBM Plex Sans Arabic';
           ctx.fillText('الوكيل', 0, 7);
         } else {
-          // رسم سبيكة ذهب مصقولة
           const w = p.size * 1.9;
           const h = p.size * 1.1;
 
@@ -235,7 +233,6 @@ export default function App() {
         overflow: 'hidden',
       }}
     >
-      {/* خلفية الكانفاس التفاعلية */}
       <canvas
         ref={canvasRef}
         style={{
@@ -249,7 +246,7 @@ export default function App() {
         }}
       />
 
-      {/* 1. الترويسة العلوية المتناغمة */}
+      {/* 1. الترويسة العلوية مع الشعار الجانبي والاسم الكامل */}
       <header
         style={{
           width: '100%',
@@ -260,7 +257,6 @@ export default function App() {
           zIndex: 10,
         }}
       >
-        {/* زر الصوت المينيمالست الأنيق والمصغر */}
         <button
           onClick={toggleSound}
           title={soundEnabled ? 'كتم الصوت' : 'تفعيل صوت الرنين'}
@@ -281,33 +277,42 @@ export default function App() {
           {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
         </button>
 
-        {/* هوية وشعار المحل بتناغم خطوط وألوان التطبيق */}
+        {/* هوية المحل باسمه الكامل واللوجو ذو الإطار الذهبي */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ textAlign: 'right' }}>
-            <h1 style={{ fontSize: 17, fontWeight: 800, color: '#EDEDED', letterSpacing: '-0.2px' }}>
-              مجوهرات الوكيل
+            <h1 style={{ fontSize: 18, fontWeight: 800, color: '#EDEDED', letterSpacing: '-0.2px' }}>
+              مجوهرات الوكيل بنك الذهب
             </h1>
-            <p style={{ fontSize: 12, color: '#E5B842', fontWeight: 600 }}>بنك الذهب • تعز</p>
+            <p style={{ fontSize: 12, color: '#E5B842', fontWeight: 600 }}>تعز • شارع 26 سبتمبر</p>
           </div>
-          <img
-            src={appLogo}
-            alt="شعار الوكيل"
+          <div
             style={{
-              width: 42,
-              height: 42,
-              borderRadius: 11,
-              objectFit: 'cover',
-              border: '1px solid #27272A',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.4)',
+              width: 44,
+              height: 44,
+              borderRadius: 12,
+              border: '1.5px solid #D4AF37',
+              boxShadow: '0 0 10px rgba(212, 175, 55, 0.25)',
+              overflow: 'hidden',
+              backgroundColor: '#09090B',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-            onError={(e) => {
-              (e.target as HTMLElement).style.display = 'none';
-            }}
-          />
+          >
+            <img
+              src={appLogo}
+              alt="شعار مجوهرات الوكيل بنك الذهب"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
         </div>
       </header>
 
-      {/* 2. المحتوى الأوسط: المقولة + الهاتف النظيف وبداخله التطبيق فقط */}
+      {/* 2. المحتوى الأوسط: الهاتف النظيف وبداخله التطبيق */}
       <main
         style={{
           display: 'flex',
@@ -331,7 +336,6 @@ export default function App() {
           احصل على <span style={{ color: '#E5B842' }}>بنك الذهب</span> في هاتفك
         </h2>
 
-        {/* مجسم الهاتف الواقعي المطابق لنظام أبل */}
         <div
           style={{
             width: 250,
@@ -349,7 +353,6 @@ export default function App() {
             alignItems: 'center',
           }}
         >
-          {/* Dynamic Island */}
           <div
             style={{
               position: 'absolute',
@@ -362,7 +365,6 @@ export default function App() {
             }}
           />
 
-          {/* أيقونة التطبيق الحقيقية الوحيدة مع التوهج الفاخر */}
           <div
             ref={phoneTargetRef}
             className="gold-app-glow"
@@ -371,7 +373,7 @@ export default function App() {
               height: 92,
               borderRadius: 22,
               overflow: 'hidden',
-              border: '1.5px solid rgba(229, 184, 66, 0.4)',
+              border: '1.5px solid rgba(229, 184, 66, 0.5)',
               cursor: 'pointer',
               backgroundColor: '#161618',
               display: 'flex',
@@ -381,7 +383,7 @@ export default function App() {
           >
             <img
               src={appLogo}
-              alt="تطبيق الوكيل"
+              alt="تطبيق مجوهرات الوكيل بنك الذهب"
               style={{
                 width: '100%',
                 height: '100%',
@@ -390,14 +392,13 @@ export default function App() {
             />
           </div>
 
-          <p style={{ marginTop: 14, fontSize: 13, fontWeight: 700, color: '#EDEDED' }}>
-            الوكيل - بنك الذهب
+          <p style={{ marginTop: 14, fontSize: 14, fontWeight: 800, color: '#EDEDED' }}>
+            مجوهرات الوكيل بنك الذهب
           </p>
           <span style={{ fontSize: 11, color: '#A1A1AA', fontWeight: 500, marginTop: 2 }}>
-            أسعار الذهب اللحظية بتعز
+            أسعار الذهب والعيارات اللحظية بتعز
           </span>
 
-          {/* شريط السحب السفلي */}
           <div
             style={{
               position: 'absolute',
@@ -410,7 +411,7 @@ export default function App() {
           />
         </div>
 
-        {/* 3. صندوقا التحميل الخاليان من الإطارات الذهبية النافرة (Clean Dark Cards) */}
+        {/* 3. صندوقا التحميل */}
         <div
           style={{
             display: 'flex',
@@ -421,7 +422,6 @@ export default function App() {
             justifyContent: 'center',
           }}
         >
-          {/* صندوق Google Play */}
           <a
             href="https://play.google.com/store/apps"
             target="_blank"
@@ -455,7 +455,6 @@ export default function App() {
             </div>
           </a>
 
-          {/* صندوق App Store */}
           <a
             href="https://www.apple.com/app-store/"
             target="_blank"
@@ -488,7 +487,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* 4. الشريط السفلي المعتمد */}
+      {/* 4. الشريط السفلي */}
       <footer
         style={{
           width: '100%',
